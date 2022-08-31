@@ -1,5 +1,6 @@
 const { Server } = require("socket.io");
 const db = require("./db");
+const PORT = process.env.PORT || 4000;
 
 const io = new Server({
   cors: {
@@ -35,4 +36,4 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(4000);
+io.listen(PORT);
