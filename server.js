@@ -1,3 +1,4 @@
+const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { Client } = require("pg");
 
@@ -30,10 +31,11 @@ const run = async () => {
   await db.query(messagesTable);
   console.log('db initialized');
 
-  const io = new Server({
+  const httpServer = createServer();
+  const io = new Server(httpServer, {
     cors: {
-      origin: ["http://localhost:5173", "https://chatt-backup-frontend-production.up.railway.app"],
-      methods: ["GET", "POST"],
+      origin: "https://chatt-backup-frontend-production.up.railway.app",
+      // methods: ["GET", "POST"],
     },
   });
   
@@ -66,8 +68,9 @@ const run = async () => {
       io.to(socket.currentRoom).emit("message:update", rows);
     });
   });
-  
-  io.listen(80);
+
+  httpServer.listen(80, '0.0.0.0')
+  // io.listen(80);
 }
 
 run();
