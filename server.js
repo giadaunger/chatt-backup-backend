@@ -14,7 +14,7 @@ const messagesTable = `
   )
 `;
 
-const PORT = process.env.PORT || 4000;
+// const PORT = process.env.PORT || 4000;
 
 const run = async () => {
   const db = new Client({
@@ -67,7 +67,7 @@ const run = async () => {
     });
   });
   
-  io.listen(PORT);
+  io.listen(80);
 }
 
 run();
