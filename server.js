@@ -69,7 +69,7 @@ const run = async () => {
     });
   });
 
-  httpServer.listen(80, '0.0.0.0')
+  httpServer.listen(443, '0.0.0.0')
   // io.listen(80);
 }
 
