@@ -3,7 +3,7 @@ const { Client } = require("pg");
 
 const db_url =
   process.env.DATABASE_URL ||
-  "http://localhost:5432";
+  "postgresql://postgres:2bth5OrLhQfWzkKFpPxc@containers-us-west-147.railway.app:7530/railway";
 
 const messagesTable = `
   CREATE TABLE IF NOT EXISTS messages (
