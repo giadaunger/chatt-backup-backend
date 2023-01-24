@@ -32,16 +32,18 @@ const run = async () => {
 
   const io = new Server({
     cors: {
-      origin: ["http://localhost:5173", "https://osuka-chatt.herokuapp.com"],
+      origin: ["http://localhost:5173", "https://chatt-backup-frontend-production.up.railway.app"],
       methods: ["GET", "POST"],
     },
   });
   
   io.on("connection", (socket) => {
+    console.log('socket io connected')
     socket.join("default");
     socket.currentRoom = "default";
   
     socket.on("room:join", async (room) => {
+      console.log('join', room)
       socket.leave(socket.currentRoom);
       socket.join(room);
       socket.currentRoom = room;
@@ -53,6 +55,7 @@ const run = async () => {
     });
   
     socket.on("message:send", async (message) => {
+      console.log('message', message)
       await db.query(
         "INSERT INTO messages (message, sender, room) VALUES ($1, $2, $3)",
         [message, socket.id, socket.currentRoom]
