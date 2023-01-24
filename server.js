@@ -69,7 +69,7 @@ const run = async () => {
     });
   });
 
-  httpServer.listen(80)
+  httpServer.listen(process.env.PORT || 80)
   // io.listen(80);
 }
 
